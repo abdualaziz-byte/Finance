@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My history
+{% endblock %}
+
+
+{% block main %}
+ <table>
+    <tr>
+        <th>symbol</th>
+        <th>shares amount</th>
+        <th> price at the time</th>
+        <th>date</th>
+                <th>transactiontype</th>
+
+    </tr>
+
+
+{% for x in history %}
+<tr>
+ <td> {{x["symbol"]}} </td>
+  <td> {{x["shares"]}} </td>
+  <td> {{x["price"]}}</td>
+  <td> {{x["date"]}}</td>
+    <td> {{x["transaction_type"]}}</td>
+
+
+     </tr>
+{%endfor %}
+    </table>
+
+{% endblock %}
+

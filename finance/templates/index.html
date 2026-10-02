@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+
+ {% block title %}
+    My portfolio
+{% endblock %}
+
+{% block main %}
+<h1> Your portfolio </h1>
+<hr>
+
+<h2 style="margin-top: 30px;"> current balance = {{balance}} </h2 >
+
+ <table>
+    <tr>
+        <th>Stock name</th>
+        <th>owned amount</th>
+        <th> current  market price</th>
+        <th>total value of holding</th>
+    </tr>
+
+
+      {%set at = namespace(assettotal=0) %}
+{% for x in portfolio %}
+<tr>
+ <td> {{x["symbol"]}} </td>
+  <td> {{x["shares"]}} </td>
+  <td> {{x["price"]}}</td>
+  <td> {{x["price"]*x["shares"]}}</td>
+   {%  set at.assettotal = at.assettotal + (x["price"]*x["shares"])%}
+     </tr>
+{%endfor %}
+
+<h3 style="margin-top: 30px;"> combined balance = {{at.assettotal + balance}} </h3 >
+<hr>
+
+
+
+ </table>
+<form action="/" method="post" style="margin-top: 30px;">        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="addfunds" placeholder="addfunds" type="number">
+                    <button class="btn btn-primary" type="submit">add funds</button>
+        </div>
+{% endblock %}
